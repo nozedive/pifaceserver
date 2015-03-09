@@ -13,22 +13,47 @@
       header h2 { font-size: 18px; color: #444; }
       .piface { margin-bottom: 42px; }
       #pi_logo { vertical-align: middle;}
-      #input, #output { display: none; padding: 4px; }
-      .input_bt, .output_bt { display: inline-block; width: 64px; height: 64px; border: 3px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; margin: 4px;}
-      .input_bt div, .output_bt div { font-size: 26px; margin-top: 6px; }
-      #host { background: #bd1143;  border: 3px solid black; border-radius: 4px; padding: 4px; color: white; font-size: 18px; font-family: monospace; }
+      #input, #output, #temp { display: none; padding: 4px; }
+      .input_bt div, .output_bt div, .temp_bt div { font-size: 26px; margin-top: 6px; }
+
+       #host { background: #bd1143;  border: 3px solid black; border-radius: 4px; padding: 4px; color: white; font-size: 18px; font-family: monospace; }
+      
       .footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 0 16px;; height: 30px; line-height: 2em; color: #ccc; background: #000; background: linear-gradient(#222, #000) repeat scroll 0% 0% transparent; border-top: 2px solid #262626; text-align: right; font-size: 0.8em; z-index: 100; }
+      
       a { color: #999; text-decoration: none; border: 0px none; }
       a:hover { text-decoration: underline; }
+
+
+
+
+      .input_bt, .output_bt { display: inline-block; width: 64px; height: 64px; border: 3px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; margin: 4px;}
+      .temp_bt              { display: inline-block; width: 64px; height: 84px; border: 3px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; margin: 4px;}
+      #set_up {font-size: 20px; margin-top: 11px;}
+      #set_down {font-size: 20px; margin-top: 11px;}
+      #amb_temp_val {font-size: 30px; margin-top: 6px;}
+      #set_temp_val {font-size: 30px; margin-top: 6px;}
+
+
       @media only screen and (max-width: 640px) {
       .input_bt, .output_bt { width: 48px; height: 48px; border: 1px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; }
+      .temp_bt              { width: 68px; height: 58px; border: 1px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size:12px; }
+      #set_up {font-size: 20px; margin-top: 13px;}
+      #set_down {font-size: 20px; margin-top: 13px;}
+      #amb_temp_val {font-size: 34px; margin-top: 0px;}
+      #set_temp_val {font-size: 34px; margin-top: 0px;}
       }
-      @media only screen and (max-width: 320px) {
-      .input_bt, .output_bt { width: 64px; height: 64px; border: 1px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; }
-      }
-      @media only screen and (min-width: 900px) {
+
+
+      @media only screen and (min-width: 1100px) {
       .input_bt, .output_bt { width: 92px; height: 92px; border: 4px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 12px; }
+      .temp_bt              { width: 120px; height: 92px; border: 4px solid black; border-radius: 4px; background: #333; color: #999; font-family: sans-serif, monospace; font-size: 18px; }
+      #set_up {font-size: 29px; margin-top: 17px;}
+      #set_down {font-size: 29px; margin-top: 17px;}
+      #amb_temp_val {font-size: 40px; margin-top: 6px;}
+      #set_temp_val {font-size: 40px; margin-top: 6px;}
       }
+
+
     </style>
   </head>
 <body>
@@ -38,7 +63,7 @@
   </header>
   <div id="con_div">
     <label for="host">Host :</label>
-    <input type="text" id="host" value="192.168.1.106" />
+    <input type="text" id="host" value="50.179.70.141" />
     <input type="button" id="connect" value="connect" onclick='connect()' />
   </div>
   <div class="piface">
@@ -57,20 +82,22 @@
     <h2>Output</h2>
     <div id="out_0" class="output_bt" onclick="ws.send('0')">0<div id="out_0_state">--</div></div>
     <div id="out_1" class="output_bt" onclick="ws.send('1')">1<div id="out_1_state">--</div></div>
-    <div id="out_2" class="output_bt" onclick="ws.send('2')">2<div id="out_2_state">--</div></div>
+    <div id="out_2" class="output_bt" onclick="">Heater<div id="out_2_state">--</div></div>
     <div id="out_3" class="output_bt" onclick="ws.send('3')">3<div id="out_3_state">--</div></div>
     <div id="out_4" class="output_bt" onclick="ws.send('4')">4<div id="out_4_state">--</div></div>
     <div id="out_5" class="output_bt" onclick="ws.send('5')">5<div id="out_5_state">--</div></div>
     <div id="out_6" class="output_bt" onclick="ws.send('6')">6<div id="out_6_state">--</div></div>
     <div id="out_7" class="output_bt" onclick="ws.send('7')">7<div id="out_7_state">--</div></div>
   </div>
+  <div id="temp">
+    <h2>Temp</h2>
+    <div id="amb_temp" class="temp_bt" onclick="">amb temp<div id="amb_temp_val">--</div></div>
+    <div id="set_temp" class="temp_bt" onclick="">set temp<div id="set_temp_val">--</div></div>
+    <div id="up_temp" class="temp_bt" onclick="ws.send('11')">Set<div id="set_up">--</div></div>
+    <div id="down_temp" class="temp_bt" onclick="ws.send('10')">Set<div id="set_down">--</div></div>
+  </div>
   </div><!-- piface -->
-
-  <div id="atemp3" class="input_bt">temp<div id="ambtempval">--</div></div>
-
-<div id="out_7" class="output_bt" onclick="ws.send('7')">7<div id="ambtemp">--</div></div>
-
-<footer class="footer"><a href="#">adcomp</a></footer>
+<footer class="footer"><a href="#">Derek Seaton</a></footer>
 <script>
 var ws = null;
 
@@ -89,6 +116,7 @@ function connect() {
     document.getElementById('host').style["background"] = "#bd1143";
     document.getElementById('input').style["display"] = 'none';
     document.getElementById('output').style["display"] = 'none';
+    document.getElementById('temp').style["display"] = 'none';
     document.getElementById("connect").style.visibility = "visible";
   };
 
@@ -96,8 +124,9 @@ function connect() {
     console.log("WebSocket open ..")
     document.getElementById('host').style["background"] = "#7eb52b";
     document.getElementById("connect").style.visibility = "hidden";
-    document.getElementById('input').style["display"] = 'block';
+    document.getElementById('input').style["display"] = 'none';
     document.getElementById('output').style["display"] = 'block';
+    document.getElementById('temp').style["display"] = 'block';
   };
 }
 
@@ -123,8 +152,28 @@ function update(piface) {
     else {
       document.getElementById('out_' + i).style["background"] = "#bd1143";
       document.getElementById('out_' + i+ '_state').innerHTML = "On";
-    }
+    } 
   }
+
+
+
+  // temperature
+    
+      document.getElementById('amb_temp').style["background"] = "#333";
+      document.getElementById('amb_temp_val').innerHTML = piface['temp'][0];
+
+      document.getElementById('set_temp').style["background"] = "#333";
+      document.getElementById('set_temp_val').innerHTML = piface['temp'][1];
+
+  // hack to add up and down text
+      
+      document.getElementById('set_up').innerHTML = "UP";
+
+      document.getElementById('set_down').innerHTML = "DOWN";    
+    
+
+
+
 }
 </script>
 
