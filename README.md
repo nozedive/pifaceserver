@@ -1,7 +1,10 @@
 piface-python-websocket-server
-// This code modified from https://github.com/adcomp/piface-python-websocket-server 
-// I have added thermostat logic and second thread to check a one-wire temperature sensor.
-// View my blog post here: https://medium.com/@derek_seaton/piface-thermostat-server-a7a60d974e32#.xsl6qw2d1
+
+This code modified from https://github.com/adcomp/piface-python-websocket-server 
+
+I have added thermostat logic and second thread to check a one-wire temperature sensor.
+
+View my blog post here: https://medium.com/@derek_seaton/piface-thermostat-server-a7a60d974e32#.xsl6qw2d1
 ==============================
 - Hardware Prerequisites:
   * PiFace: http://www.piface.org.uk/
